@@ -4,23 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Oauth Verifier</title>
+    <title>アクセストークン</title>
 </head>
 
 <body>
+    <h1>認証が完了しました</h1>
     <div class="container">
+        <span class="label">access token:</span>
         <pre><code>{{access_token}}</code></pre>
-        <button onclick="copyToClipboard()">copy</button>
-
+        <button onclick="copyToClipboard(this)">copy</button>
     </div>
-        <div class="container"></div>
+
+    <div class="container">
+        <span class="label">access secret token:</span>
         <pre><code>{{access_token_secret}}</code></pre>
-        <button onclick="copyToClipboard()">copy</button>
+        <button onclick="copyToClipboard(this)">copy</button>
     </div>
 
     <script>
-        function copyToClipboard() {
-            var text = document.querySelector('code').innerText;
+        function copyToClipboard(button) {
+            var text = button.previousElementSibling.innerText;
             navigator.clipboard.writeText(text);
         }
     </script>
@@ -38,11 +41,12 @@
         color: #ffffff;
         display: inline-block;
         margin: 0;
+        font-size: 18px;
     }
 
     code {
         font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, Courier, monospace;
-        font-size: 85%;
+        font-size: 18px;
         color: #ffffff;
         background-color: #2d2d2d;
         display: inline;
@@ -70,8 +74,6 @@
     }
 
     button:active {
-        -webkit-transform: translate(0, 2px);
-        -moz-transform: translate(0, 2px);
         transform: translate(0, 2px);
         border-bottom: none;
     }
@@ -79,6 +81,12 @@
     .container {
         display: flex;
         align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .label {
+        font-size: 22px;
+        margin-right: 10px;
     }
 </style>
 
