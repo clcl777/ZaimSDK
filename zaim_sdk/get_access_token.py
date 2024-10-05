@@ -44,6 +44,8 @@ class ServerThread(threading.Thread):
         parsed_uri = urlparse(CALLBACK_URI)
         host = parsed_uri.hostname
         port = parsed_uri.port
+        if host is None or port is None:
+            raise ValueError("CALLBACK_URIが不正です。")
         self.srv = make_server(host, port, app)
         self.ctx = app.app_context()
         self.ctx.push()
